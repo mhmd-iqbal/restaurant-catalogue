@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Aplikasi kami menampilkan daftar restoran yang lengkap dan beragam, mulai dari restoran cepat saji hingga restoran mewah. Setiap restoran memiliki profil individu yang berisi informasi seperti lokasi, jenis masakan, jam operasional, serta gambar dan ulasan dari pengunjung sebelumnya."
+    />
+    <meta name="theme-color" content="#DB0000" />
+
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <link rel="manifest" href="./app.webmanifest" />
+    <link rel="icon" href="./favicon.webp" />
+    <title>Restaurant Catalogue</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <a href="#mainContent" class="skip-link" tabindex="0">Menuju ke konten</a>
+    <header class="app-bar">
+      <div class="app-bar__menu">
+        <button id="hamburgerButton">☰</button>
+      </div>
+      <div class="app-bar__brand">
+        <h1>Resto Catalogue</h1>
+      </div>
+      <nav id="navigationDrawer" class="app-bar__navigation">
+        <ul>
+          <li><a href="#/list">Home</a></li>
+          <li><a href="#/favorite">Favorite</a></li>
+          <li>
+            <a href="https://www.github.com/mhmd-iqbal">About Us</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section class="hero">
+      <picture>
+        <source
+          type="image/webp"
+          media="(max-width: 480px)"
+          srcset="./images/heros/hero-image_4-small.webp"
+          class="hero-image"
+        />
+        <source
+          type="image/webp"
+          media="(max-width: 800px)"
+          srcset="./images/heros/hero-image_4-large.webp"
+          class="hero-image"
+        />
+        <img
+          src="./images/heros/hero-image_4.webp"
+          alt="Hero Image"
+          class="hero-image"
+          loading="lazy"
+          crossorigin="anonymous"
+        />
+      </picture>
+      <div class="hero-content">
+        <h1 class="hero-title">Restaurant Catalogue</h1>
+        <p class="hero-subtitle">Submission 3 by Muhammad Iqbal</p>
+        <a
+          href="https://www.github.com/mhmd-iqbal"
+          class="btn btn-primary"
+          style="margin-top: 20px"
+          >GitHub Muhammad Iqbal</a
+        >
+      </div>
+    </section>
+    <main id="mainContent" tabindex="0"></main>
+    <footer>
+      <div style="width: 100%">
+        All data obtained from
+        <a
+          href="https://restaurant-api.dicoding.dev/"
+          target="_blank"
+          style="
+            display: inline-block;
+            width: fit-content;
+            height: fit-content;
+            padding: 0.8em 0;
+            color: white !important;
+          "
+          rel="noreferrer"
+          >Dicoding</a
+        >
+      </div>
+    </footer>
+  </body>
+</html>
