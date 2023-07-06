@@ -14,16 +14,7 @@ import FavoriteRestaurant from "../../data/favorite-restaurant";
 const Detail = {
   async render() {
     return `
-      <div id="restaurant" class="restaurant"></div>
-      <div class="restaurant__menus">
-        <h1>Foods</h1>
-        <div id="foods-list" style="margin-bottom: 10px;"></div>
-        <h1>Drinks</h1>
-        <div id="drinks-list"></div>
-      </div>
-      <p style="font-size: 18pt; margin-bottom: 10px; font-weight: bold; text-align: center;">Customer Reviews</p>
-      <div id="review-restaurant" style="display:flex; flex-flow: row wrap; gap: 1rem; width: 100%; justify-content: center;">
-      </div>
+      <div id="restaurant"></div>
      
       <div id="likeButtonContainer"></div>
     `;
@@ -33,13 +24,34 @@ const Detail = {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const response = await APISource.detailRestaurant(url.id);
 
+    if (!response) {
+      return;
+    }
+
     const restaurant = response.restaurant;
 
     const restaurantContainer = document.querySelector("#restaurant");
-    const reviewRestaurantContainer =
-      document.getElementById("review-restaurant");
 
     restaurantContainer.innerHTML = createRestaurantDetailTemplate(restaurant);
+    const foodsListContainer = document.getElementById("foods-list");
+    const drinksListContainer = document.getElementById("drinks-list");
+
+    restaurant.menus.foods.forEach((food) => {
+      const foodItem = document.createElement("div");
+      foodItem.textContent = food.name;
+      foodItem.classList.add("chips");
+      foodsListContainer.appendChild(foodItem);
+    });
+
+    restaurant.menus.drinks.forEach((drink) => {
+      const drinkItem = document.createElement("div");
+      drinkItem.textContent = drink.name;
+      drinkItem.classList.add("chips");
+      drinksListContainer.appendChild(drinkItem);
+    });
+
+    const reviewRestaurantContainer =
+      document.querySelector("#review-restaurant");
 
     restaurant.customerReviews.forEach((review) => {
       reviewRestaurantContainer.innerHTML +=

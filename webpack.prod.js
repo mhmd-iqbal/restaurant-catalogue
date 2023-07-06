@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable object-curly-spacing */
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common");

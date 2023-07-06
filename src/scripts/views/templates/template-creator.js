@@ -7,49 +7,45 @@ import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
 
 const createRestaurantDetailTemplate = (restaurant) => {
-  const foodsList = document.getElementById("foods-list");
-  const drinksList = document.getElementById("drinks-list");
-
-  restaurant.menus.foods.forEach((food) => {
-    const foodItem = document.createElement("div");
-    foodItem.textContent = food.name;
-    foodItem.classList.add("chips");
-    foodsList.appendChild(foodItem);
-  });
-
-  restaurant.menus.drinks.forEach((drink) => {
-    const drinkItem = document.createElement("div");
-    drinkItem.textContent = drink.name;
-    drinkItem.classList.add("chips");
-    drinksList.appendChild(drinkItem);
-  });
-
   const output = `
-  <h2 class="restaurant__name">${restaurant.name}</h2>
+  <h1 class="restaurant__name">${restaurant.name}</h1>
+  <div  class="restaurant">
     <picture>
-        <source class="restaurant__picture lazyload" media="(max-width: 480px)" data-srcset="${
-          restaurant.pictureId
-            ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId
-            : "https://picsum.photos/id/1/800/450?grayscale"
-        }">
-        <img class="restaurant__picture lazyload" data-src="${
-          restaurant.pictureId
-            ? CONFIG.BASE_IMAGE_URL + restaurant.pictureId
-            : "https://picsum.photos/id/1/800/450?grayscale"
-        }" alt="${restaurant.name}">
+      <source class="restaurant__picture lazyload" media="(max-width: 480px)" data-srcset="${
+        restaurant.pictureId
+          ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId
+          : "https://picsum.photos/id/1/800/450?grayscale"
+      }">
+      <img class="restaurant__picture lazyload" data-src="${
+        restaurant.pictureId
+          ? CONFIG.BASE_IMAGE_URL + restaurant.pictureId
+          : "https://picsum.photos/id/1/800/450?grayscale"
+      }" alt="${restaurant.name}">
     </picture> 
-  <div class="restaurant__info">
-    <h3>Information</h3>
-    <h4>City</h4>
-    <p>${restaurant.city}</p>
-    <h4>Address</h4>
-    <p>${restaurant.address}</p>
-    <h4>Rating</h4>
-    <p>${restaurant.rating}</p>
+    <div class="restaurant__info">
+      <h3 style="background-color: #171717; color: white; padding: 1rem; margin-bottom: 1rem;">About Restaurant</h3>
+      <h4>City</h4>
+      <p>${restaurant.city}</p>
+      <h4>Address</h4>
+      <p>${restaurant.address}</p>
+      <h4>Rating</h4>
+      <p>${restaurant.rating}</p>
+    </div>
+    <div class="restaurant__description">
+      <h3 style="background-color: #171717; color: white; padding: 1rem; margin-bottom: 1rem;">Description</h3>
+      <p>${restaurant.description}</p>
+    </div>
   </div>
-  <div class="restaurant__description">
-    <h3>Description</h3>
-    <p>${restaurant.description}</p>
+  
+  <div class="restaurant__menus">
+    <h3 style="background-color: #171717; color: white; padding: 1rem; margin-bottom: 1rem;">Foods</h3>
+    <div id="foods-list" style="margin-bottom: 10px;"></div>
+    <h3 style="background-color: #171717; color: white; padding: 1rem; margin-bottom: 1rem;">Drinks</h3>
+    <div id="drinks-list"></div>
+  </div>
+
+  <h3 style="background-color: #171717; color: white; padding: 1rem; margin-bottom: 1rem; font-size: 14pt;">Customer Reviews</h3>
+  <div id="review-restaurant" style="display:flex; flex-flow: row wrap; gap: 1rem; width: 100%;">
   </div>
 `;
 
@@ -70,22 +66,14 @@ const createRestaurantItemTemplate = (restaurant) =>
         <div class="card restaurant-item" tabindex="0">
           <div class="card-box-overlay">${restaurant.city}</div>
             <div class="card-top-image">
-              <picture>
-                  <source type="image/webp" class="lazyload" media="(max-width: 480px)" data-srcset="${
-                    restaurant.pictureId
-                      ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId
-                      : "https://picsum.photos/id/1/800/450?grayscale"
-                  }">
-                  <img class="restaurant-item-image lazyload" data-src="${
-                    CONFIG.BASE_IMAGE_URL + restaurant.pictureId
-                  }" alt="${restaurant.name}"
+                  <img class="restaurant-item-image lazyload" alt="${
+                    restaurant.name
+                  }"
                   data-src="${
                     restaurant.pictureId
                       ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId
                       : "https://picsum.photos/id/1/800/450?grayscale"
-                  }"
-                  sizes="(min-width: 800px) 480px, 800px">
-              </picture> 
+                  }">
             </div>
           <div class="card-body">
             <h1 class="card-title">${restaurant.name}</h1>

@@ -12,11 +12,19 @@ const app = new App({
   content: document.querySelector("#mainContent"),
 });
 
+const allSkeleton = document.querySelectorAll(".skeleton");
+
 window.addEventListener("hashchange", () => {
   app.renderPage();
+  allSkeleton.forEach((item) => {
+    item.classList.remove("skeleton");
+  });
 });
 
 window.addEventListener("load", () => {
   app.renderPage();
+  allSkeleton.forEach((item) => {
+    item.classList.remove("skeleton");
+  });
   swRegister();
 });
