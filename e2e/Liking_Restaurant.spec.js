@@ -10,7 +10,7 @@ Before(({ I }) => {
   I.amOnPage("/#/favorite");
 });
 
-Scenario("showing empty liked movies", ({ I }) => {
+Scenario("showing empty favorite restaurants", ({ I }) => {
   I.see(
     "No restaurants have been added to your favorite restaurants list yet",
     ".restaurant-item__not__found"
