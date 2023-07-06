@@ -19,5 +19,5 @@ module.exports = merge(common, {
     },
     compress: true,
   },
-  plugins: [new CleanWebpackPlugin(), new BundleAnalyzerPlugin()],
+  plugins: [new CleanWebpackPlugin()],
 });

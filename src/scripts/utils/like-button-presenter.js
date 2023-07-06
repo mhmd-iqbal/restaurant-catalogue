@@ -5,7 +5,7 @@ import {
 } from "../views/templates/template-creator";
 
 const LikeButtonPresenter = {
-  async init({ likeButtonContainer, favoriteRestaurant, restaurant }) {
+  async init({likeButtonContainer, favoriteRestaurant, restaurant}) {
     this._likeButtonContainer = likeButtonContainer;
     this._restaurant = restaurant;
     this._favoriteRestaurant = favoriteRestaurant;
@@ -14,7 +14,7 @@ const LikeButtonPresenter = {
   },
 
   async _renderButton() {
-    const { id } = this._restaurant;
+    const {id} = this._restaurant;
 
     if (await this._isRestaurantExist(id)) {
       this._renderLiked();

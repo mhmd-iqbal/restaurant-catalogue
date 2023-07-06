@@ -2,9 +2,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const path = require("path");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -45,31 +43,4 @@ module.exports = {
       filename: "[name].[contenthash].css",
     }),
   ],
-  optimization: {
-    minimizer: [
-      "...",
-      new ImageMinimizerPlugin({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            plugins: [
-              "imagemin-gifsicle",
-              "imagemin-mozjpeg",
-              "imagemin-pngquant",
-              "imagemin-svgo",
-            ],
-          },
-        },
-        generator: [
-          {
-            type: "asset",
-            implementation: ImageMinimizerPlugin.imageminGenerate,
-            options: {
-              plugins: ["imagemin-webp"],
-            },
-          },
-        ],
-      }),
-    ],
-  },
 };

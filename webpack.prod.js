@@ -4,6 +4,7 @@ const common = require("./webpack.common");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
@@ -39,28 +40,12 @@ module.exports = merge(common, {
     new PurgeCSSPlugin({
       paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
     }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      openAnalyzer: false,
+    }),
   ],
   optimization: {
-    minimize: true,
-    minimizer: [
-      // eslint-disable-next-line quotes
-      `...`,
-      new CssMinimizerPlugin(),
-      new ImageMinimizerPlugin({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminGenerate,
-          options: {
-            // Lossless optimization with custom option
-            // Feel free to experiment with options for better result for you
-            plugins: [
-              ["gifsicle", { interlaced: true }],
-              ["jpegtran", { progressive: true }],
-              ["optipng", { optimizationLevel: 5 }],
-            ],
-          },
-        },
-      }),
-    ],
     splitChunks: {
       chunks: "all",
       minSize: 20000,
@@ -82,5 +67,33 @@ module.exports = merge(common, {
         },
       },
     },
+    minimize: true,
+    minimizer: [
+      // eslint-disable-next-line quotes
+      `...`,
+      new CssMinimizerPlugin(),
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              "imagemin-gifsicle",
+              "imagemin-mozjpeg",
+              "imagemin-pngquant",
+              "imagemin-svgo",
+            ],
+          },
+        },
+        generator: [
+          {
+            type: "asset",
+            implementation: ImageMinimizerPlugin.imageminGenerate,
+            options: {
+              plugins: ["imagemin-webp"],
+            },
+          },
+        ],
+      }),
+    ],
   },
 });
