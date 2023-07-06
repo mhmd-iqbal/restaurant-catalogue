@@ -7,7 +7,6 @@ import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
 
 const createRestaurantDetailTemplate = (restaurant) => {
-  console.log(restaurant);
   const foodsList = document.getElementById("foods-list");
   const drinksList = document.getElementById("drinks-list");
 
